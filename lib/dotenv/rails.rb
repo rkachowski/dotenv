@@ -26,7 +26,7 @@ module Dotenv
     def load
       Dotenv.load(
         root.join(".env.local"),
-        root.join(".env.#{Rails.env}"),
+        root.join(".env.#{ENV["RACK_ENV"] || Rails.env}"),
         root.join(".env")
       )
     end
