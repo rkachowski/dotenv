@@ -42,7 +42,8 @@ module Dotenv
   def with(*filenames, &block)
     if filenames.empty?
       filenames << ".env"
-      filenames << ".env.#{ENV["RACK_ENV"]}"
+      environment = ENV["RACK_ENV"] ? ENV["RACK_ENV"] : ENV["RAILS_ENV"]
+      filenames << ".env.#{environment}" if environment
     end
 
     filenames.reduce({}) do |hash, filename|
